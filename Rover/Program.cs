@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MarsMission.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace MarsMission
     {
         public static void Main(string[] args)
         {
-            Rover rover = new Rover(0, 0, 'N');
+            Rover rover = new Rover(0, 0, Direction.N);
             rover.Move("LMLMLMLMM");
             rover.PrintPosition();
         }

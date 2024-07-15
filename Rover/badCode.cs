@@ -1,4 +1,5 @@
 using System;
+using MarsMission.Enums;
 
 namespace MarsMission
 {
@@ -6,13 +7,13 @@ namespace MarsMission
     {
         public int X { get; private set; }
         public int Y { get; private set; }
-        public char Direction { get; private set; }
+        public Direction Facing { get; private set; }
 
-        public Rover(int x, int y, char direction)
+        public Rover(int x, int y, Direction facing)
         {
             X = x;
             Y = y;
-            Direction = direction;
+            Facing = facing;
         }
 
         public void Move(string commands)
@@ -36,31 +37,64 @@ namespace MarsMission
 
         private void TurnLeft()
         {
-            if (Direction == 'N') Direction = 'W';
-            else if (Direction == 'W') Direction = 'S';
-            else if (Direction == 'S') Direction = 'E';
-            else if (Direction == 'E') Direction = 'N';
+            switch (Facing)
+            {
+                case Direction.N:
+                    Facing = Direction.W;
+                    break;
+                case Direction.S:
+                    Facing = Direction.E;
+                    break;
+                case Direction.E:
+                    Facing = Direction.N;
+                    break;
+                case Direction.W:
+                    Facing = Direction.S;
+                    break;
+            }
         }
 
         private void TurnRight()
         {
-            if (Direction == 'N') Direction = 'E';
-            else if (Direction == 'E') Direction = 'S';
-            else if (Direction == 'S') Direction = 'W';
-            else if (Direction == 'W') Direction = 'N';
+            switch (Facing)
+            {
+                case Direction.N:
+                    Facing = Direction.E;
+                    break;
+                case Direction.S:
+                    Facing = Direction.W;
+                    break;
+                case Direction.E:
+                    Facing = Direction.S;
+                    break;
+                case Direction.W:
+                    Facing = Direction.N;
+                    break;
+            }
         }
 
         private void MoveForward()
         {
-            if (Direction == 'N') Y += 1;
-            else if (Direction == 'E') X += 1;
-            else if (Direction == 'S') Y -= 1;
-            else if (Direction == 'W') X -= 1;
+            switch (Facing)
+            {
+                case Direction.N:
+                    Y++;
+                    break;
+                case Direction.S:
+                    Y--;
+                    break;
+                case Direction.E:
+                    X++;
+                    break;
+                case Direction.W:
+                    X--;
+                    break;
+            }
         }
 
         public void PrintPosition()
         {
-            Console.WriteLine($"Rover Position: {X}, {Y}, {Direction}");
+            Console.WriteLine($"Rover Position: {X}, {Y}, {Facing}");
         }
     }
 }
