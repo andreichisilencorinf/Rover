@@ -4,5 +4,7 @@
     &lt;TestId&gt;xUnit::68A81476-E156-4AAB-9D49-E4814F8182F4::net7.0::MarsMission.Tests.RoverTests.Move_WithValidData_ChangesPosition&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::68A81476-E156-4AAB-9D49-E4814F8182F4::net7.0::MarsMission.Tests.CommandTokenizerTests.Test&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::68A81476-E156-4AAB-9D49-E4814F8182F4::net7.0::MarsMission.Tests.CommandTokenizerTests.GetCommands_WithInvalidData_ReturnsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::68A81476-E156-4AAB-9D49-E4814F8182F4::net7.0::MarsMission.Tests.MoveCommandResolverTests.Resolve_WithValidData_MovesCorrectlyWithOneUnit&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::68A81476-E156-4AAB-9D49-E4814F8182F4::net7.0::MarsMission.Tests.RightCommandResolverTests.Resolve_WithValidData_MovesCorrectlyToTheRight&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
