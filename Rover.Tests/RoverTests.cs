@@ -15,8 +15,8 @@ namespace MarsMission.Tests
             rover.Move("LMLMLMLMM");
 
             //Assert
-            Assert.Equal(destination.X, rover.X);
-            Assert.Equal(destination.Y, rover.Y);
+            Assert.Equal(destination.Position.X, rover.Position.X);
+            Assert.Equal(destination.Position.Y, rover.Position.Y);
             Assert.Equal(destination.Facing, rover.Facing);
         }
     }

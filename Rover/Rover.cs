@@ -7,17 +7,21 @@ namespace MarsMission
 {
     public class Rover
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public Position Position { get; private set; }
         public Direction Facing { get; private set; }
         private readonly ICommandTokenizer _commandTokenizer;
-
+        private readonly IEnumerable<ICommandResolver> _commandResolvers;
         public Rover(int x, int y, Direction facing)
         {
-            X = x;
-            Y = y;
+            Position = new Position(x, y);
             Facing = facing;
             _commandTokenizer = new CommandTokenizer();
+            _commandResolvers = new List<ICommandResolver>
+            {
+                new LeftCommandResolver(),
+                new RightCommandResolver(),
+                new MoveCommandResolver()
+            };
         }
 
         public void Move(string commands)
@@ -25,84 +29,21 @@ namespace MarsMission
             var parsedCommands = _commandTokenizer.GetCommands(commands);
             foreach (var command in parsedCommands)
             {
-                switch (command)
+                var commandResolver = _commandResolvers.FirstOrDefault(cr => cr.SupportedCommand == command);
+                if (commandResolver is null)
                 {
-                    case CommandType.L:
-                        TurnLeft();
-                        break;
-                    case CommandType.R:
-                        TurnRight();
-                        break;
-                    case CommandType.M:
-                        MoveForward();
-                        break;
-                    default:
-                        throw new InvalidEnumArgumentException(
-                            $"Invalid command for {nameof(Rover)}.command: {command}");
+                    throw new InvalidEnumArgumentException($"Invalid command for {nameof(Rover)}.command: {command}");
                 }
-            }
-        }
 
-        private void TurnLeft()
-        {
-            switch (Facing)
-            {
-                case Direction.N:
-                    Facing = Direction.W;
-                    break;
-                case Direction.S:
-                    Facing = Direction.E;
-                    break;
-                case Direction.E:
-                    Facing = Direction.N;
-                    break;
-                case Direction.W:
-                    Facing = Direction.S;
-                    break;
-            }
-        }
-
-        private void TurnRight()
-        {
-            switch (Facing)
-            {
-                case Direction.N:
-                    Facing = Direction.E;
-                    break;
-                case Direction.S:
-                    Facing = Direction.W;
-                    break;
-                case Direction.E:
-                    Facing = Direction.S;
-                    break;
-                case Direction.W:
-                    Facing = Direction.N;
-                    break;
-            }
-        }
-
-        private void MoveForward()
-        {
-            switch (Facing)
-            {
-                case Direction.N:
-                    Y++;
-                    break;
-                case Direction.S:
-                    Y--;
-                    break;
-                case Direction.E:
-                    X++;
-                    break;
-                case Direction.W:
-                    X--;
-                    break;
+                var newLocation = commandResolver.Resolve(Position, Facing);
+                Position = newLocation.Item1;
+                Facing = newLocation.Item2;
             }
         }
 
         public void PrintPosition()
         {
-            Console.WriteLine($"Rover Position: {X}, {Y}, {Facing}");
+            Console.WriteLine($"Rover Position: {Position.X}, {Position.Y}, {Facing}");
         }
     }
 }
