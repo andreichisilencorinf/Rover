@@ -1,5 +1,7 @@
 using System;
+using System.ComponentModel;
 using MarsMission.Enums;
+using MarsMission.Interfaces;
 
 namespace MarsMission
 {
@@ -8,29 +10,35 @@ namespace MarsMission
         public int X { get; private set; }
         public int Y { get; private set; }
         public Direction Facing { get; private set; }
+        private readonly ICommandTokenizer _commandTokenizer;
 
         public Rover(int x, int y, Direction facing)
         {
             X = x;
             Y = y;
             Facing = facing;
+            _commandTokenizer = new CommandTokenizer();
         }
 
         public void Move(string commands)
         {
-            foreach (char command in commands)
+            var parsedCommands = _commandTokenizer.GetCommands(commands);
+            foreach (var command in parsedCommands)
             {
-                if (command == 'L')
+                switch (command)
                 {
-                    TurnLeft();
-                }
-                else if (command == 'R')
-                {
-                    TurnRight();
-                }
-                else if (command == 'M')
-                {
-                    MoveForward();
+                    case CommandType.L:
+                        TurnLeft();
+                        break;
+                    case CommandType.R:
+                        TurnRight();
+                        break;
+                    case CommandType.M:
+                        MoveForward();
+                        break;
+                    default:
+                        throw new InvalidEnumArgumentException(
+                            $"Invalid command for {nameof(Rover)}.command: {command}");
                 }
             }
         }
