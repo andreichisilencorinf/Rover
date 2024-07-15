@@ -2,8 +2,6 @@ using System;
 
 namespace MarsMission
 {
-
-
     public class Rover
     {
         public int X { get; private set; }
@@ -63,16 +61,6 @@ namespace MarsMission
         public void PrintPosition()
         {
             Console.WriteLine($"Rover Position: {X}, {Y}, {Direction}");
-        }
-    }
-
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Rover rover = new Rover(0, 0, 'N');
-            rover.Move("LMLMLMLMM");
-            rover.PrintPosition();
         }
     }
 }

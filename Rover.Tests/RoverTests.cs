@@ -1,4 +1,4 @@
-namespace Rover.Tests
+namespace MarsMission.Tests
 {
     public class RoverTests
     {
@@ -6,8 +6,8 @@ namespace Rover.Tests
         public void Move_WithValidData_ChangesPosition()
         {
             //Arrange
-            MarsMission.Rover rover = new MarsMission.Rover(0, 0, 'N');
-            var destination = new MarsMission.Rover(0, 1, 'N');
+            Rover rover = new Rover(0, 0, 'N');
+            var destination = new Rover(0, 1, 'N');
 
             //Act
             rover.Move("LMLMLMLMM");
