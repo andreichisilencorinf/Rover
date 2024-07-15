@@ -13,7 +13,7 @@ namespace MarsMission
         {
             Rover rover = new Rover(0, 0, Direction.N);
             rover.Move("LMLMLMLMM");
-            rover.PrintPosition();
+            Console.WriteLine(rover.ToString());
         }
     }
 }

@@ -19,5 +19,18 @@ namespace MarsMission.Tests
             Assert.Equal(destination.Position.Y, rover.Position.Y);
             Assert.Equal(destination.Facing, rover.Facing);
         }
+
+        [Fact]
+        public void ToString_WithValidData_DisplaysCorrectlyThePosition()
+        {
+            //Arrange
+            Rover rover = new Rover(3, 2, Direction.W);
+
+            //Act
+            var result = rover.ToString();
+
+            //Assert
+            Assert.Equal("Position: (3, 2), Facing: W", result);
+        }
     }
 }

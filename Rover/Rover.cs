@@ -41,9 +41,9 @@ namespace MarsMission
             }
         }
 
-        public void PrintPosition()
+        public override string ToString()
         {
-            Console.WriteLine($"Rover Position: {Position.X}, {Position.Y}, {Facing}");
+            return $"Position: ({Position.X}, {Position.Y}), Facing: {Facing}";
         }
     }
 }
